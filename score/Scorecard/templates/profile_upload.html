@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HNG Leaderboard</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <style>
+        .file-upload input[type='file'] {
+  display: none;
+}
+
+body {
+  background: #00B4DB;
+  background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+  background: linear-gradient(to right, #0083B0, #00B4DB);
+  height: 100vh;
+}
+
+.rounded-lg {
+  border-radius: 1rem;
+}
+
+.custom-file-label.rounded-pill {
+  border-radius: 50rem;
+}
+
+.custom-file-label.rounded-pill::after {
+  border-radius: 0 50rem 50rem 0;
+}
+    </style>
+</head>
+<body>
+<section>
+  <div class="container p-5">
+    <!-- For demo purpose -->
+    <div class="row mb-5 text-center text-white">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="display-4">HNG Leaderboard</h1>
+        <p class="lead">Upload a CSV file to generate the leaderboard.</p>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5 mx-auto">
+            <div class="p-5 bg-white shadow rounded-lg"><img src="https://hng.tech/img/brand-logo.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+                <div class="custom-file overflow-hidden rounded-pill mb-5">
+                {% if messages %}
+                {% for message in messages %}
+                    <div>
+                    <!--                | means OR operator-->
+                    <strong>{{message|safe}}</strong>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {{order}}
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label for="file1" class="custom-file-label rounded-pill"> Upload a file</label>
+                            <input type="file" id="file1" name="file"  class="custom-file-input rounded-pill">
+                            <br>
+                            <small>Only accepts CSV files</small>
+                            <button type="submit" class="file-upload btn btn-primary btn-block rounded-pill shadow">Upload</button>
+                        </form>
+                    {% endif %}
+                        <br/>
+                        <a class="file-upload btn btn-success btn-block rounded-pill shadow" href="{% url 'leaderboard' %}">Go to Leaderboard></a>
+                        </div>
+                    </div>
+              </div>
+        </div>
+  </div>
+</section>
+</body>
+</html>

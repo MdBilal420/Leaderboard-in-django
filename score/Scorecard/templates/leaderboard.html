@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+
+body {
+    background: #00B4DB;
+    font-family: Assistant, sans-serif;
+     background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+  background: linear-gradient(to right, #0083B0, #00B4DB);
+  height: 100vh;
+}
+
+.cell-1 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #fff;
+    border-bottom: 5px solid transparent;
+    background-clip: padding-box
+}
+
+thead {
+    background: #dddcdc
+}
+
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <a class="file-upload btn btn-primary btn-block rounded-pill shadow" href="{% url 'profile_upload' %}">Home</a>
+    <div class="row mb-5 text-center text-white">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="display-4">HNG Leaderboard</h1>
+        <p class="lead">Here Leaderboard changes every Week</p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Position</th>
+                                <th>Username</th>
+                                <th>Points Scored</th>
+                                <th>status</th>
+                                <th>Share:</th>
+                            </tr>
+                        </thead>
+                        {% for p in pr %}
+                        <tbody class="table-body">
+                            <tr class="cell-1">
+                                <td class="text-center">{{forloop.counter}}</td>
+                                <td>{{p.name}}</td>
+                                <td>{{p.points}}</td>
+                                {% if forloop.counter < 4%}
+                                    <td><span class="badge badge-success">Leaders</span></td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                                <td><i class="fa fa-facebook-official" style="font-size:48px;color:blue"></i></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!--   <h2>User &#45;&#45;&#45;&#45; Points</h2>-->
+<!--    {% for p in pr %}-->
+<!--        <h2>{{p.name}}&#45;&#45;&#45;&#45;{{p.points}}</h2>-->
+<!--    {% endfor %}-->
+
+<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
